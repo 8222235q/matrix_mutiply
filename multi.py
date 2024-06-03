@@ -2,7 +2,7 @@ import numpy as np
 
 # A = [[0, 0, 5, 2], [4, 2, 1, 0], [0, -1, 2, 1], [7, 2, 0, 5]]
 # B = [[1, 2, 4, -1], [5, 3, 1, 0], [0, 0, 2, 0], [1, 7, 6, 3]]
-A = np.random.randint(0, 10, size=(5, 4))
+A = np.random.randint(0, 10, size=(4, 4))
 B = np.random.randint(0, 10, size=(4, 4))
 
 # C = [[], [], [], []]
@@ -28,6 +28,20 @@ def matrix_multiply(a, b):
     return c
 
 
+def matrix_addition(matrix1, matrix2):
+    # 确保两个矩阵的尺寸相同
+    if len(matrix1) != len(matrix2) or len(matrix1[0]) != len(matrix2[0]):
+        raise ValueError("Matrices must have the same dimensions for addition.")
+
+    result = []
+    for i in range(len(matrix1)):
+        row = []
+        for j in range(len(matrix1[0])):
+            row.append(matrix1[i][j] + matrix2[i][j])
+        result.append(row)
+    return result
+
+
 def split_matrix(matrix):
     rows = len(matrix)  # 矩阵的行数x-axis
     cols = len(matrix[0])  # 矩阵的列数y-axis
@@ -51,20 +65,37 @@ def split_matrix(matrix):
     return top_left, top_right, bottom_left, bottom_right
 
 
+def merge_matrices(*matrices):  # 合并矩阵
+    merged_matrix = []
+    for matrix in matrices:
+        for row in matrix:
+            merged_matrix.append(row)
+    return merged_matrix
+
+
 if __name__ == '__main__':
     # C = matrix_multiply(A, B)
     # for row in C:
     #     print(row)
 
+    # 打印结果
+    print(A)
+    # print(split_matrix(A))
+    print(B)
+    # print(split_matrix(B))
+    # print(matrix_multiply(A, B))
+    print(np.dot(A, B))
 
     # 拆分矩阵
 
-    top_left, top_right, bottom_left, bottom_right = split_matrix(A)
+    top_left_A, top_right_A, bottom_left_A, bottom_right_A = split_matrix(A)
+    top_left_B, top_right_B, bottom_left_B, bottom_right_B = split_matrix(B)
 
-    # 打印结果
-    print(A)
-    print("Top Left:\n", top_left)
-    print("Top Right:\n", top_right)
-    print("Bottom Left:\n", bottom_left)
-    print("Bottom Right:\n", bottom_right)
-    # print(matrix_multiply(A, B))
+    # 矩阵块相乘
+    # 计算各个部分的矩阵乘法结果并相加
+    C_tl = matrix_addition(matrix_multiply(top_left_A, top_left_B), matrix_multiply(top_right_A, bottom_left_B))
+    C_tr = matrix_addition(matrix_multiply(top_left_A, top_right_B), matrix_multiply(top_right_A, bottom_right_B))
+    C_bl = matrix_addition(matrix_multiply(bottom_left_A, top_left_B), matrix_multiply(bottom_right_A, bottom_left_B))
+    C_br = matrix_addition(matrix_multiply(bottom_left_A, top_right_B), matrix_multiply(bottom_right_A, bottom_right_B))
+
+    print(C_tl, C_tr, C_bl, C_br)
