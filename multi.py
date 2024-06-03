@@ -65,7 +65,7 @@ def split_matrix(matrix):
     return top_left, top_right, bottom_left, bottom_right
 
 
-def merge_matrices(*matrices):  # 合并矩阵
+def merge_matrices(*matrices):  # 合并矩阵, 可传入任意个矩阵
     merged_matrix = []
     for matrix in matrices:
         for row in matrix:
@@ -97,5 +97,5 @@ if __name__ == '__main__':
     C_tr = matrix_addition(matrix_multiply(top_left_A, top_right_B), matrix_multiply(top_right_A, bottom_right_B))
     C_bl = matrix_addition(matrix_multiply(bottom_left_A, top_left_B), matrix_multiply(bottom_right_A, bottom_left_B))
     C_br = matrix_addition(matrix_multiply(bottom_left_A, top_right_B), matrix_multiply(bottom_right_A, bottom_right_B))
-
     print(C_tl, C_tr, C_bl, C_br)
+    print(merge_matrices(C_tl, C_tr, C_bl, C_br))
