@@ -1,6 +1,5 @@
 import random
 import time
-import numpy
 import numpy as np
 
 
@@ -96,21 +95,23 @@ def merge_matrices(*matrices):  # 合并矩阵, 可传入任意个矩阵
 if __name__ == '__main__':
     start_time = time.time()  # 获取开始时间
 
-    size = 4
+    size = 1000
     A = generate_random_matrix(size)
     B = generate_random_matrix(size)
     # print(A, B)
     top_left_A, top_right_A, bottom_left_A, bottom_right_A = split_matrix(A)
     top_left_B, top_right_B, bottom_left_B, bottom_right_B = split_matrix(B)
-    #
-    C_tl = matrix_addition(matrix_multiply(top_left_A, top_left_B), matrix_multiply(top_right_A, bottom_left_B))
-    C_tr = matrix_addition(matrix_multiply(top_left_A, top_right_B), matrix_multiply(top_right_A, bottom_right_B))
-    C_bl = matrix_addition(matrix_multiply(bottom_left_A, top_left_B), matrix_multiply(bottom_right_A, bottom_left_B))
-    C_br = matrix_addition(matrix_multiply(bottom_left_A, top_right_B), matrix_multiply(bottom_right_A, bottom_right_B))
 
-    print(np.dot(A, B))
-    print(C_tl, C_tr, C_bl, C_br)
+    # matrix_multiply(top_left_A, top_left_B)
+    # C_tl = matrix_addition(matrix_multiply(top_left_A, top_left_B), matrix_multiply(top_right_A, bottom_left_B))
+    # C_tr = matrix_addition(matrix_multiply(top_left_A, top_right_B), matrix_multiply(top_right_A, bottom_right_B))
+    # C_bl = matrix_addition(matrix_multiply(bottom_left_A, top_left_B), matrix_multiply(bottom_right_A, bottom_left_B))
+    # C_br = matrix_addition(matrix_multiply(bottom_left_A, top_right_B), matrix_multiply(bottom_right_A, bottom_right_B))
+
+    # print(np.dot(A, B))
+    # print(C_tl, C_tr, C_bl, C_br)
     # matrix_multiply(A, B)
+    # print(C_tl)
     end_time = time.time()  # 获取结束时间
     elapsed_time = end_time - start_time  # 计算经过的时间
     print(f"Elapsed time: {elapsed_time} seconds")
