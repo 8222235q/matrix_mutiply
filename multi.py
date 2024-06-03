@@ -2,7 +2,7 @@ import numpy as np
 
 # A = [[0, 0, 5, 2], [4, 2, 1, 0], [0, -1, 2, 1], [7, 2, 0, 5]]
 # B = [[1, 2, 4, -1], [5, 3, 1, 0], [0, 0, 2, 0], [1, 7, 6, 3]]
-size = 1000
+size = 100
 A = np.random.rand(size, size)
 B = np.random.rand(size, size)
 
@@ -10,24 +10,27 @@ B = np.random.rand(size, size)
 
 
 def matrix_multiply(a, b):
-    # m = len(A)
-    # n = len(A[0])
-    # p = len(B[0])
     """
-        计算两个二维数组（矩阵）的乘积
-        """
-    if len(a[0]) != len(b):
-        raise ValueError("Number of columns in A must be equal to number of rows in B")  # 增加了异常捕获
+    计算两个二维数组（矩阵）的乘积
+    """
+    m = len(a)  # 减少重复计算：将 len(a), len(a[0]), 和 len(b[0]) 的值提前存储在变量中，避免在循环中重复调用 len 函数。
+    n = len(a[0])
+    p = len(b[0])
 
-    c = [[0] * len(a) for _ in range(len(b))]
+    if n != len(b):
+        raise ValueError("Number of columns in A must be equal to number of rows in B")
 
-    for i in range(len(a)):
-        for j in range(len(b[0])):
-            for k in range(len(a[0])):  # 可对len函数进行优化
-                c[i][j] += a[i][k] * b[k][j]  # 此处可进行进一步优化
+    # 初始化结果矩阵为零矩阵
+    c = [[0] * p for _ in range(m)]
+
+    for i in range(m):
+        for j in range(p):
+            sum = 0  # 优化
+            for k in range(n):
+                sum += a[i][k] * b[k][j]
+            c[i][j] = sum
 
     return c
-
 
 def matrix_addition(matrix1, matrix2):
     # 确保两个矩阵的尺寸相同
