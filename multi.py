@@ -1,6 +1,7 @@
 import random
 import time
 
+import numpy as np
 
 
 # A = [[0, 0, 5, 2], [4, 2, 1, 0], [0, -1, 2, 1], [7, 2, 0, 5]]
@@ -99,8 +100,9 @@ if __name__ == '__main__':
     A = generate_random_matrix(size)
     B = generate_random_matrix(size)
     # print(A, B)
-    top_left_A, top_right_A, bottom_left_A, bottom_right_A = split_matrix(A)
-    top_left_B, top_right_B, bottom_left_B, bottom_right_B = split_matrix(B)
+    print(np.dot(A, B))
+    # top_left_A, top_right_A, bottom_left_A, bottom_right_A = split_matrix(A)
+    # top_left_B, top_right_B, bottom_left_B, bottom_right_B = split_matrix(B)
 
     # matrix_multiply(top_left_A, top_left_B)
     # C_tl = matrix_addition(matrix_multiply(top_left_A, top_left_B), matrix_multiply(top_right_A, bottom_left_B))

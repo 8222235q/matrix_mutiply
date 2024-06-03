@@ -15,13 +15,14 @@ def compute_block(queue, A_block, B_block, operation, index):
 
 if __name__ == '__main__':
 
+    size = 10  # 调整矩阵大小 size x size
 
-
-    size = 10000
     A = generate_random_matrix(size)
     B = generate_random_matrix(size)
 
-    # print(np.dot(A, B))
+    # numpy.dot的结果
+    print("result of Numpy:")
+    print(np.dot(A, B))
 
     # 分割矩阵
     top_left_A, top_right_A, bottom_left_A, bottom_right_A = split_matrix(A)
@@ -72,6 +73,14 @@ if __name__ == '__main__':
     # print("C_tr:", C_tr)
     # print("C_bl:", C_bl)
     # print("C_br:", C_br)
+
+    # 转换格式
+    result = [tl + tr for tl, tr in zip(C_tl, C_tr)] + [bl + br for bl, br in zip(C_bl, C_br)]
+
+    # 打印结果
+    print("result of block_computing:")
+    for row in result:
+        print(row)
 
     end_time = time.time()  # 获取结束时间
     elapsed_time = end_time - start_time  # 计算经过的时间
