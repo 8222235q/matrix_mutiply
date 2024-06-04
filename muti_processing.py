@@ -15,7 +15,7 @@ def compute_block(queue, A_block, B_block, operation, index):
 
 if __name__ == '__main__':
 
-    size = 10  # 调整矩阵大小 size x size
+    size = 4  # 调整矩阵大小 size x size
 
     A = generate_random_matrix(size)
     B = generate_random_matrix(size)

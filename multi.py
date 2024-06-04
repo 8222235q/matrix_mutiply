@@ -14,6 +14,7 @@ def generate_random_matrix(size):  # 矩阵生成器
     matrix = []
     for _ in range(size):
         row = [random.randint(0, 9) for _ in range(size)]
+        # row = [random.uniform(0, 9) for _ in range(size)]  # 可使用浮点
         matrix.append(row)
     return matrix
 
@@ -100,7 +101,7 @@ if __name__ == '__main__':
     A = generate_random_matrix(size)
     B = generate_random_matrix(size)
     # print(A, B)
-    print(np.dot(A, B))
+    # print(np.dot(A, B))
     # top_left_A, top_right_A, bottom_left_A, bottom_right_A = split_matrix(A)
     # top_left_B, top_right_B, bottom_left_B, bottom_right_B = split_matrix(B)
 

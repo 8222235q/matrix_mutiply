@@ -1,3 +1,7 @@
+import numpy as np
+
+from multi import *
+
 def add_matrices(a, b):
     return [[a[i][j] + b[i][j] for j in range(len(a[0]))] for i in range(len(a))]
 
@@ -36,18 +40,16 @@ def strassen_multiply(a, b):
 
 
 # 示例
-a = [
-    [1, 2, 3, 4],
-    [5, 6, 7, 8],
-    [9, 10, 11, 12],
-    [13, 14, 15, 16]
-]
-b = [
-    [1, 2, 3, 4],
-    [5, 6, 7, 8],
-    [9, 10, 11, 12],
-    [13, 14, 15, 16]
-]
+size = 100
+a = generate_random_matrix(size)
+b = generate_random_matrix(size)
+
+# print(np.dot(a, b))
+
+start_time = time.time()  # 获取开始时间
 result = strassen_multiply(a, b)
+end_time = time.time()  # 获取结束时间
+elapsed_time = end_time - start_time  # 计算经过的时间
+print(f"Elapsed time: {elapsed_time} seconds")
 for row in result:
     print(row)
